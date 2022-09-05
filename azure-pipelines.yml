@@ -27,5 +27,6 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
+          echo "Hello!"
           source ~/.secrets.sh
           ./create_repos.sh
