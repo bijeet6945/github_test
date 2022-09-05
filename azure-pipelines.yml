@@ -25,7 +25,7 @@ stages:
 
     - task: Bash@3
       inputs:
-        workingDirectory: '$(System.DefaultWorkingDirectory)'
+        workingDirectory: '$(HOME)'
         targetType: 'inline'
         script: |
           echo "Hello!"
