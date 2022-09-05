@@ -28,6 +28,7 @@ stages:
         workingDirectory: $(Build.Repository.LocalPath)
         targetType: 'inline'
         script: |
+          cd $(Build.Repository.LocalPath)
           echo "Hello!"
           source ~/.secrets.sh
           ./create_repos.sh
