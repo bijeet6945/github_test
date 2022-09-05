@@ -25,7 +25,7 @@ stages:
 
     - task: Bash@3
       inputs:
-        workingDirectory: '$(HOME)'
+        workingDirectory: $(Build.Repository.LocalPath)
         targetType: 'inline'
         script: |
           echo "Hello!"
