@@ -1,21 +1,34 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
+# Project for github
 
 trigger:
-- develop
+- main
 
-pool:
-  vmImage: ubuntu-latest
+variables:
 
-steps:
-- script: Creating a new repository in github
-  displayName: 'REPO'
+  # Agent VM image name
+  vmImageName: 'ubuntu-latest'
 
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: |
-      source ~/.secrets.sh
-      ./create_repos.sh
+stages:
+- stage: Build
+  displayName: Build stage
+  jobs:
+  - job: Github
+    displayName: Repository Creation
+    pool:
+      vmImage: $(vmImageName)
+
+    steps:
+
+# steps:
+# - script: Creating a new repository in github
+#   displayName: 'REPO'
+
+    - task: Bash@3
+      inputs:
+        workingDirectory: $(Build.Repository.LocalPath)
+        targetType: 'inline'
+        script: |
+          cd $(Build.Repository.LocalPath)
+          echo "Hello!"
+          source ~/.secrets.sh
+          ./create_repos.sh
