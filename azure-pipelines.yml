@@ -29,7 +29,7 @@ stages:
   jobs:
   - job: Build_Master_Version_Number
     variables:
-       patch: $[counter(variables['minor'], 0)]
+       patch: $[counter(variables['minor'])]
     steps:
       - bash: |
            echo "##vso[build.updatebuildnumber]$(major).$(minor).$(patch)"
@@ -42,8 +42,8 @@ stages:
   jobs:
   - job: Build_Branch_Version_Number
     variables:
-       prpatch: $[counter(variables['system.pullrequest.pullrequestid'], 0)]
-       brpatch: $[counter(variables['build.sourcebranchname'], 0)]
+       prpatch: $[counter(variables['system.pullrequest.pullrequestid'])]
+       brpatch: $[counter(variables['build.sourcebranchname'])]
     steps:
       - bash: |
            echo "##vso[build.updatebuildnumber]$(major).$(minor)-PullRequest.$(prpatch)"
@@ -53,6 +53,7 @@ stages:
            echo "##vso[build.updatebuildnumber]$(major).$(minor)-$(Build.SourceBranchName).$(brpatch)"
         condition: ne(variables['Build.Reason'], 'PullRequest')
         name: SetBranchBuildName
+
 # Stage for building your application
 
 - stage: Build_Steps
